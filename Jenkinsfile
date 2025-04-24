@@ -2,21 +2,27 @@ pipeline {
     agent any
 
     stages {
+        stage('Checkout') {
+            steps {
+                git 'https://github.com/HarshitaRaotole/simplejavaapp.git'
+            }
+        }
+
         stage('Build') {
             steps {
-                sh 'mvn clean package'
+                bat 'mvn clean install'  // Use bat instead of sh
             }
         }
 
         stage('Test') {
             steps {
-                sh 'mvn test'
+                bat 'mvn test'  // Use bat instead of sh
             }
         }
 
         stage('Deploy') {
             steps {
-                echo 'Deploying the application...'
+                bat 'mvn deploy'  // Use bat instead of sh
             }
         }
     }
