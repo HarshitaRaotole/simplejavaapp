@@ -1,25 +1,29 @@
 pipeline {
     agent any
-    
+
     stages {
+        stage('Clone Repo') {
+            steps {
+                git 'https://github.com/HarshitaRaotole/simplejavaapp.git'
+            }
+        }
+
         stage('Build') {
             steps {
-                echo 'Building the application'
-                bat 'mvn clean install'  // Adjust this to your build tool (e.g., Maven or Gradle)
+                sh 'mvn clean package'
             }
         }
 
         stage('Test') {
             steps {
-                echo 'Running tests'
-                bat 'mvn test'  // Adjust this to run your tests
+                sh 'mvn test'
             }
         }
 
         stage('Deploy') {
             steps {
-                echo 'Deploying application'
-                // Add deployment steps here
+                echo 'Deploying the application...'
+                // Add deploy commands here
             }
         }
     }
